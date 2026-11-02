@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>비움 — 전체 화면 보기 (발표용)</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <style>
+    :root { --bg: #E9E6DF; --text: #17201B; --text-2: #5B6660; --line: #D8D3C9; --primary: #1E5A3C; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+      font-size: 16px; line-height: 1.5; letter-spacing: -0.01em;
+    }
+    header { padding: 32px 40px 8px; display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; }
+    header h1 { margin: 0; font-size: 22px; font-weight: 700; }
+    header p { margin: 0; color: var(--text-2); font-size: 14px; }
+    header a { color: var(--primary); font-weight: 600; font-size: 14px; }
+    .group { padding: 24px 40px 8px; }
+    .group h2 { margin: 0 0 12px; font-size: 15px; font-weight: 600; color: var(--text-2); }
+    .strip { display: flex; gap: 24px; overflow-x: auto; padding-bottom: 24px; scrollbar-width: thin; }
+    .shot { flex: 0 0 auto; width: 300px; }
+    .shot iframe {
+      width: 390px; height: 844px; border: 0; background: #F7F5F0;
+      transform: scale(0.7692); transform-origin: 0 0;
+      border-radius: 28px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+      display: block;
+    }
+    .shot .frame { width: 300px; height: 649px; overflow: hidden; border-radius: 28px; border: 1px solid var(--line); background: #F7F5F0; }
+    .shot figcaption { margin-top: 10px; font-size: 14px; }
+    .shot figcaption b { display: block; font-weight: 700; }
+    .shot figcaption span { color: var(--text-2); font-size: 13px; }
+    figure { margin: 0; }
+    footer { padding: 16px 40px 40px; font-size: 13px; color: var(--text-2); }
+    code { font-family: ui-monospace, Consolas, monospace; font-size: 12px; background: #fff; padding: 1px 6px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>비움 — 전체 화면 보기</h1>
+    <p>수원역 로데오거리 QR 쓰레기통 환경마일리지 앱 · 아이시스 1조 발표용</p>
+    <a href="index.html">앱 실행하기</a>
+  </header>
+
+  <section class="group">
+    <h2>온보딩</h2>
+    <div class="strip" id="s-onboarding"></div>
+  </section>
+  <section class="group">
+    <h2>홈 · 지도</h2>
+    <div class="strip" id="s-main"></div>
+  </section>
+  <section class="group">
+    <h2>QR 스캔 플로우</h2>
+    <div class="strip" id="s-scan"></div>
+  </section>
+  <section class="group">
+    <h2>지갑 · 스토어</h2>
+    <div class="strip" id="s-store"></div>
+  </section>
+  <section class="group">
+    <h2>내정보 · 운영자</h2>
+    <div class="strip" id="s-me"></div>
+  </section>
+
+  <footer>
+    각 화면은 <code>index.html?state=이름</code>로 열려요. 상태 이름: onboard1·onboard2·onboard3·home·map·map-list·map-sheet·scan-camera·scan-result·scan-pay·scan-pay-short·scan-open·scan-done·wallet·wallet-topup·store·store-suwon·store-coupons·store-sheet·me·me-empty·report·settings·admin.
+    미리보기는 저장소에 기록하지 않아요. 캡처는 브라우저 확대 100%에서 하면 390×844 그대로 나와요.
+  </footer>
+
+  <script>
+    (function () {
+      var groups = {
+        's-onboarding': [
+          ['onboard1', '온보딩 1 · 문제', '16시간 공백 타임라인'],
+          ['onboard2', '온보딩 2 · 작동 방식', '스캔 → 300원 → 300P 환급, 왜 돈을 받는지'],
+          ['onboard3', '온보딩 3 · 시작하기', '닉네임 입력(기본값 태희)']
+        ],
+        's-main': [
+          ['home', '홈', '마일리지 잔액 · 가까운 쓰레기통 · 주간 차트 · 캠페인'],
+          ['map', '지도', 'SVG 지도 · 적재율 3단계 핀 · 필터 칩'],
+          ['map-sheet', '지도 · 쓰레기통 상세', 'RD-04 바텀시트(적재율·수거 시각·품목)'],
+          ['map-list', '지도 · 리스트 뷰', '거리순 목록']
+        ],
+        's-scan': [
+          ['scan-camera', '스캔 1 · 카메라', '스캔 프레임 · 시뮬레이션 버튼 · 코드 입력'],
+          ['scan-result', '스캔 2 · 인식 결과', '쓰레기통 정보 · 품목 선택'],
+          ['scan-pay', '스캔 3 · 결제 확인', '300원 · 잔액 · 환급 예정 300P'],
+          ['scan-pay-short', '스캔 3 · 잔액 부족', '충전 안내 상태'],
+          ['scan-open', '스캔 4 · 투입구 열림', '30초 원형 카운트다운(실제 동작)'],
+          ['scan-done', '스캔 5 · 완료', '300P 환급 · 누적 · 오늘 N번째']
+        ],
+        's-store': [
+          ['wallet', '지갑', '선불 잔액 · 거래 내역(결제/환급 쌍)'],
+          ['wallet-topup', '충전', '금액 칩 · 결제수단 선택'],
+          ['store', '스토어 · 친환경 굿즈', '6종 그리드'],
+          ['store-suwon', '스토어 · 수원 굿즈', '수원굿즈 인증 6종'],
+          ['store-coupons', '스토어 · 로데오거리 쿠폰', '6종 리스트'],
+          ['store-sheet', '스토어 · 상품 상세', '교환 바텀시트']
+        ],
+        's-me': [
+          ['me', '내정보', '이번 달 통계 · 교환함 바코드'],
+          ['me-empty', '내정보 · 빈 교환함', '빈 상태 디자인'],
+          ['report', '쓰레기통 신고', '가득 참/파손/악취 + 메모'],
+          ['settings', '설정', '알림 토글 · 데이터 초기화'],
+          ['admin', '운영자 보기', '적재율 테이블 · 수거 순서 · 시간대별 차트']
+        ]
+      };
+      Object.keys(groups).forEach(function (id) {
+        var el = document.getElementById(id);
+        el.innerHTML = groups[id].map(function (s) {
+          return '<figure class="shot"><div class="frame"><iframe src="index.html?state=' + s[0] + '" title="' + s[1] + '" loading="lazy"></iframe></div>' +
+            '<figcaption><b>' + s[1] + '</b><span>' + s[2] + '</span></figcaption></figure>';
+        }).join('');
+      });
+    })();
+  </script>
+</body>
+</html>

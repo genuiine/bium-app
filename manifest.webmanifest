@@ -1,0 +1,16 @@
+{
+  "name": "비움 — 로데오거리 QR 쓰레기통",
+  "short_name": "비움",
+  "description": "버리는 손이, 돌려받는 손으로. 수원역 로데오거리 QR 쓰레기통 환경마일리지 앱 프로토타입",
+  "lang": "ko",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F7F5F0",
+  "theme_color": "#1E5A3C",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
